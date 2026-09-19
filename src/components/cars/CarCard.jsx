@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
+
 function CarCard({ car }) {
   return (
     <article className="car-card">
       <div className="car-card-image">
-        <span>Imagem do carro</span>
+        <img src={car.image} alt={`${car.brand} ${car.model}`} />
       </div>
 
       <div className="car-card-content">
@@ -29,6 +31,11 @@ function CarCard({ car }) {
         <span className="car-card-location">
           {car.location}
         </span>
+
+        <Link to={`/carros/${car.id}`} className="car-card-button">
+          Ver detalhes
+        </Link>
+
       </div>
     </article>
   )
