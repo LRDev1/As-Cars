@@ -72,13 +72,13 @@ img {
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
 }
 
-.logo span {
-    color: var(--color-primary);
+.logo img {
+    width: 100px;
+    height: auto;
 }
 
 .navigation {
@@ -429,4 +429,22 @@ img {
 .car-details-actions button:hover {
   background-color: #b80710;
   transform: translateY(-1px);
+}
+
+.car-details-main {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.car-details-image {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.car-details-content {
+  padding-top: 8px;
 }
