@@ -1,4 +1,7 @@
 import corollaImage from '../assets/images/corolla-2024.jpg'
+import corollaInterior from '../assets/images/corolla-2024-2.jpeg'
+import corollaTraseira from '../assets/images/corolla-2024-3.jpeg'
+import corollaLateral from '../assets/images/corolla-2024-4.jpeg'
 import civicImage from '../assets/images/civic-2023.jpg'
 import ecosportImage from '../assets/images/ecosport-2019.jpg'
 
@@ -8,6 +11,12 @@ const cars = [
         brand: "Toyota",
         model: "Corolla",
         image: corollaImage,
+        images: [
+            corollaImage,
+            corollaInterior,
+            corollaTraseira,
+            corollaLateral
+        ],
         version: "XEi 2.0 Flex 16V Aut.",
         year: 2024,
         price: 139990,
