@@ -11,6 +11,7 @@ function CarGallery({ images = [], alt}) {
                     alt={alt}
                 />
 
+
                 <button
                     type="button"
                     className="car-gallery-arrow car-gallery-arrow-left"

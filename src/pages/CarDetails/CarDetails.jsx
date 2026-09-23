@@ -1,8 +1,14 @@
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import cars from '../../data/cars'
 import CarGallery from '../../components/cars/CarGallery'
 
 function CarDetails() {
+    const [showFinancing, setShowFinancing] = useState(false)
+    const [financingEntry, setFinancingEntry] = useState('')
+    const [financingTerm, setFinancingTerm] = useState(24)
+
+
     const { id } = useParams()
 
     const car = cars.find((car) => car.id === Number(id))
@@ -14,6 +20,10 @@ function CarDetails() {
             </main>
         )
     }
+
+    const financedAmount = car.price - Number(financingEntry || 0)
+
+    const monthlyPayment = financedAmount / financingTerm
 
     return (
         <main className="car-details">
@@ -52,6 +62,10 @@ function CarDetails() {
                             {car.location}
                         </p>
 
+                        <span className='car-details-availability'>
+                            Disponível para visita
+                        </span>
+
                         <div className="car-details-panel">
 
                             <h2>Interessado neste veículo?</h2>
@@ -69,7 +83,7 @@ function CarDetails() {
                                     Tenho interesse
                                 </button>
 
-                                <button type="button">
+                                <button type="button" onClick={() => setShowFinancing(true)}>
                                     Simular financiamento
                                 </button>
 
@@ -154,6 +168,77 @@ function CarDetails() {
                     </div>
 
                 </section>
+
+                {showFinancing && (
+                    <div className='financing-modal'>
+
+                        <div className="financing-modal-content">
+
+                        <h2>Simular financiamento</h2>
+
+                        <p>
+                            Faça uma simulação para este veículo.
+                        </p>
+
+                        <div className="financing-field">
+
+                            <label htmlFor="financing-entry">
+                                Valor de entrada
+                            </label>
+
+                            <input
+
+                            id="financing-entry"
+                            type="number"
+                            placeholder="Ex: 30000"
+                            value={financingEntry}
+                            onChange={(event) => setFinancingEntry(event.target.value)}
+
+                            />
+
+                        </div>
+
+                        <div className="financing-field">
+
+                            <label htmlFor="financing-term">
+                                Prazo de financiamento
+                            </label>
+
+                            <select 
+                            id="financing-term"
+                            value={financingTerm}
+                            onChange={(event) => setFinancingTerm(Number(event.target.value))}
+                            >
+                                <option value="24">24 meses</option>
+                                <option value="36">36 meses</option>
+                                <option value="48">48 meses</option>
+                                <option value="60">60 meses</option>
+                            </select>
+
+                            <p>
+                                Valor financiado: R$ {financedAmount.toLocaleString('pt-BR')}
+                            </p>
+
+                            <p>
+                                Parcela estimada: R$ {monthlyPayment.toLocaleString('pt-BR', {
+                                    minumumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                })}
+                            </p>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            onClick={() => setShowFinancing(false)}
+                        >
+                            Fechar
+                        </button>
+
+                        </div>
+                        
+                    </div>
+                )}
 
             </div>
         </main>
