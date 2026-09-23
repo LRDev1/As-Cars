@@ -21,9 +21,24 @@ function CarDetails() {
         )
     }
 
-    const financedAmount = car.price - Number(financingEntry || 0)
+    const financedAmount = Math.max(
+        car.price - Number(financingEntry || 0),
+        0
+    )
 
-    const monthlyPayment = financedAmount / financingTerm
+    const invalidEntry = Number(financingEntry || 0) > car.price
+
+    const monthlyInterestRate = 0.015
+
+    const monthlyPayment =
+        financedAmount *
+        (
+            monthlyInterestRate *
+            Math.pow(1 + monthlyInterestRate, financingTerm)
+        ) /
+        (
+            Math.pow(1 + monthlyInterestRate, financingTerm) - 1
+        )
 
     return (
         <main className="car-details">
@@ -195,6 +210,12 @@ function CarDetails() {
                             onChange={(event) => setFinancingEntry(event.target.value)}
 
                             />
+
+                            {invalidEntry && (
+                                <p>
+                                    A entrada não pode ser maior que o valor do veículo.
+                                </p>
+                            )}
 
                         </div>
 
