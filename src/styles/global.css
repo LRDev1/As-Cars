@@ -789,6 +789,111 @@ img {
   color: var(--color-text);
 }
 
+.interest-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.interest-modal-content {
+  width: min(100%, 500px);
+  padding: 28px;
+  border: 1px solid #242424;
+  border-radius: 12px;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+.interest-modal-content h2 {
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+
+.interest-modal-content p {
+  margin-bottom: 24px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.interest-modal-content button {
+  height: 42px;
+  padding: 0 18px;
+  border: 1px solid #333333;
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 
+
+  border-color 0.2s ease,
+  color 0.2s ease,
+  background-color 0.2s ease;
+}
+
+.interest-modal-content button:hover {
+  border-color: var(--color-primary);
+  background-color: rgba(229, 9, 20, 0.08);
+  color: var(--color-text);
+}
+
+.interest-submit-button {
+  width: 100%;
+  height: 46px;
+  margin-bottom: 12px;
+  border: 1px solid var(--color-primary);
+  border-radius: 6px;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.interest-submit-button:hover {
+  background-color: #b80710;
+  border-color: #b80710;
+  transform: translateY(-1px);
+}
+
+.interest-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.interest-field label {
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.interest-field input {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid #333333;
+  border-radius: 6px;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  outline: none;
+}
+
+.interest-field input:focus {
+  border-color: var(--color-primary);
+}
+
 .financing-field input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;

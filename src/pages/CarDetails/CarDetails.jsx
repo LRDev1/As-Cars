@@ -5,6 +5,9 @@ import CarGallery from '../../components/cars/CarGallery'
 
 function CarDetails() {
     const [showFinancing, setShowFinancing] = useState(false)
+    const [showInterest, setShowInterest] = useState(false)
+    const [interestName, setInterestName] = useState('')
+    const [interestPhone, setInterestPhone] = useState('')
     const [financingEntry, setFinancingEntry] = useState('')
     const [financingTerm, setFinancingTerm] = useState(24)
 
@@ -20,6 +23,10 @@ function CarDetails() {
             </main>
         )
     }
+
+    const interestMessage = `Interesse no ${car.brand} ${car.model} ${car.version}.
+        Nome: ${interestName}
+        WhatsApp: ${interestPhone}`
 
     const financedAmount = Math.max(
         car.price - Number(financingEntry || 0),
@@ -94,7 +101,10 @@ function CarDetails() {
 
                             <div className="car-details-actions">
 
-                                <button type="button">
+                                <button 
+                                type="button"
+                                onClick={() => setShowInterest(true)}
+                                >
                                     Tenho interesse
                                 </button>
 
@@ -217,6 +227,8 @@ function CarDetails() {
                                 </p>
                             )}
 
+                            
+
                         </div>
 
                         <div className="financing-field">
@@ -236,16 +248,24 @@ function CarDetails() {
                                 <option value="60">60 meses</option>
                             </select>
 
+                            {!invalidEntry && (
+                                <>
+                            
+
                             <p>
                                 Valor financiado: R$ {financedAmount.toLocaleString('pt-BR')}
                             </p>
 
                             <p>
                                 Parcela estimada: R$ {monthlyPayment.toLocaleString('pt-BR', {
-                                    minumumFractionDigits: 2,
+                                    minimumFractionDigits: 2,
                                     maximumFractionDigits: 2
                                 })}
                             </p>
+
+                            </>
+
+                            )}
 
                         </div>
 
@@ -256,8 +276,79 @@ function CarDetails() {
                             Fechar
                         </button>
 
+                        
+
                         </div>
                         
+                    </div>
+                )}
+
+                {showInterest && (
+                    <div className="interest-modal">
+                        <div className="interest-modal-content">
+
+                            <h2>Tenho Interesse</h2>
+
+                            <p>
+                                Preencha seus dados para entrar em contato com a AS Cars.
+                            </p>
+
+                            <div className="interest-field">
+
+                                <label htmlFor="interest-name">
+                                    Nome
+                                </label>
+
+                                <input
+                                id="interest-name"
+                                type="text"
+                                placeholder="Digite seu nome"
+                                value={interestName}
+                                onChange={(event) => setInterestName(event.target.value)}
+
+                                />
+
+                                <div className="interest-field">
+
+                                    <label htmlFor="interest-phone">
+                                        WhatsApp
+                                    </label>
+
+                                    <input 
+                                        id="interest-phone"
+                                        type="tel"
+                                        placeholder="Digite seu WhatsApp"
+                                        value={interestPhone}
+                                        onChange={(event) => setInterestPhone(event.target.value)}
+
+                                    />
+
+                                </div>
+
+                                <button
+                        type="button"
+                        className="interest-submit-button"
+                        onClick={() => {
+                            const phone = '5585999999999'
+
+                            const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(interestMessage)}`
+
+                            window.open(whatsappUrl, '_blank')
+                        }}
+                        >
+                            Enviar interesse
+                        </button>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                onClick={() => setShowInterest(false)}
+                                >
+                                    Fechar
+
+                                </button>
+                        </div>
                     </div>
                 )}
 
