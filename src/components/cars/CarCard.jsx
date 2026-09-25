@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
+import FavoriteButton from './FavoriteButton'
 
 function CarCard({ car }) {
   return (
     <article className="car-card">
+      <FavoriteButton carId={car.id}/>
       <div className="car-card-image">
         <img src={car.image} alt={`${car.brand} ${car.model}`} />
       </div>

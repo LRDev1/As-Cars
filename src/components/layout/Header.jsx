@@ -9,7 +9,7 @@ function Header(){
                 </a>
 
                 <nav className="navigation">
-                    <a href="/">Comprar carros</a>
+                    <a href="/carros">Comprar carros</a>
                     <a href="/favoritos">Favoritos</a>
                     <a href="/vender">Vender meu carro</a>                    
                 </nav>

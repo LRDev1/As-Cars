@@ -91,6 +91,7 @@ img {
     color: var(--color-text-secondary);
     font-size: 15px;
     font-weight: 500;
+    text-decoration: none;
 
     transition: color 0.2s ease;
 }
@@ -216,6 +217,7 @@ img {
 }
 
 .car-card {
+  position: relative;
   overflow: hidden;
   border: 1px solid #242424;
   border-radius: 12px;
@@ -897,4 +899,60 @@ img {
 .financing-field input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+
+  background-color: rgba(11, 11, 11, 0.85);
+  color: #ffffff;
+
+  font-size: 22px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.favorite-button:hover {
+  border-color: var(--color-primary);
+  background-color: rgba(229, 9, 20, 0.12);
+  color: var(--color-primary);
+  transform: scale(1.05);
+}
+
+.favorites-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+.favorites-page h1 {
+  margin-bottom: 32px;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.favorites-page > p {
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  margin-bottom: 32px;
 }
