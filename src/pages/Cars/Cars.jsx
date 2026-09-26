@@ -2,6 +2,9 @@ import { useState } from 'react'
 import CarGrid from '../../components/cars/CarGrid'
 import cars from '../../data/cars'
 import PriceFilter from '../../components/filters/PriceFilter'
+import YearFilter from '../../components/filters/YearFilter'
+import FilterSidebar from '../../components/filters/FilterSidebar'
+import BrandFilter from '../../components/filters/BrandFilter'
 
 function Cars() {
     const [search, setSearch] = useState('')
@@ -9,6 +12,14 @@ function Cars() {
     const [minPrice, setMinPrice] = useState('')
 
     const [maxPrice, setMaxPrice] = useState('')
+
+    const [minYear, setMinYear] = useState('')
+
+    const [maxYear, setMaxYear] = useState('')
+
+    const [brand, setBrand] = useState('')
+
+    const [isFilterOpen, setIsFilterOpen] = useState(false)
     
     const filteredCars = cars.filter((car) => {
         const searchTerm = search.toLowerCase()
@@ -17,13 +28,29 @@ function Cars() {
             car.brand.toLowerCase().includes(searchTerm) ||
             car.model.toLowerCase().includes(searchTerm)
 
+        const matchesBrand = brand === '' || car.brand === brand
+
         const matchesMinPrice =
             minPrice === '' || car.price >= Number(minPrice)
 
         const matchesMaxPrice =
             maxPrice === '' || car.price <= Number(maxPrice)
 
-            return matchesSearch && matchesMinPrice && matchesMaxPrice
+        const matchesMinYear =
+            minYear === '' || car.year >= Number(minYear)
+
+        const matchesMaxYear =
+            maxYear === '' || car.year <= Number(maxYear)
+
+            return (
+            matchesSearch &&
+            matchesBrand && 
+            matchesMinPrice && 
+            matchesMaxPrice &&
+            matchesMinYear &&
+            matchesMaxYear
+            )
+        
     })
 
     return (
@@ -48,12 +75,39 @@ function Cars() {
                 Encontramos {filteredCars.length} carros disponíveis.
             </p>
 
-            <PriceFilter
-                minPrice={minPrice}
-                setMinPrice={setMinPrice}
-                maxPrice={maxPrice}
-                setMaxPrice={setMaxPrice}
-            />
+            <button
+                type="button"
+                className="filter-toggle-button"
+                onClick={() => setIsFilterOpen(true)}
+            >
+                Filtros
+            </button>
+
+            <FilterSidebar
+                isOpen={isFilterOpen}
+                onClose={() => setIsFilterOpen(false)}
+            >
+                <BrandFilter
+                    brand={brand}
+                    setBrand={setBrand}
+                />
+
+                <PriceFilter
+                    minPrice={minPrice}
+                    setMinPrice={setMinPrice}
+                    maxPrice={maxPrice}
+                    setMaxPrice={setMaxPrice}
+                />
+
+                <YearFilter
+                    minYear={minYear}
+                    setMinYear={setMinYear}
+                    maxYear={maxYear}
+                    setMaxYear={setMaxYear}
+                />
+
+            </FilterSidebar>
+
 
             <CarGrid cars={filteredCars} />
         </main>
