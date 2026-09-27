@@ -5,6 +5,7 @@ import PriceFilter from '../../components/filters/PriceFilter'
 import YearFilter from '../../components/filters/YearFilter'
 import FilterSidebar from '../../components/filters/FilterSidebar'
 import BrandFilter from '../../components/filters/BrandFilter'
+import ModelFilter from '../../components/filters/ModelFilter'
 
 function Cars() {
     const [search, setSearch] = useState('')
@@ -19,6 +20,8 @@ function Cars() {
 
     const [brand, setBrand] = useState('')
 
+    const [model, setModel] = useState('')
+
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     
     const filteredCars = cars.filter((car) => {
@@ -29,6 +32,9 @@ function Cars() {
             car.model.toLowerCase().includes(searchTerm)
 
         const matchesBrand = brand === '' || car.brand === brand
+
+        const matchesModel =
+            model === '' || car.model === model
 
         const matchesMinPrice =
             minPrice === '' || car.price >= Number(minPrice)
@@ -45,6 +51,7 @@ function Cars() {
             return (
             matchesSearch &&
             matchesBrand && 
+            matchesModel &&
             matchesMinPrice && 
             matchesMaxPrice &&
             matchesMinYear &&
@@ -90,6 +97,11 @@ function Cars() {
                 <BrandFilter
                     brand={brand}
                     setBrand={setBrand}
+                />
+
+                <ModelFilter
+                    model={model}
+                    setModel={setModel}
                 />
 
                 <PriceFilter
